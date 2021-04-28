@@ -1,7 +1,7 @@
 // MOTOR SETUP
 #include <AccelStepper.h>
-#define dirPin 4
-#define stepPin 5
+#define dirPin 5
+#define stepPin 4
 #define motorInterfaceType 1
 AccelStepper stepper = AccelStepper(motorInterfaceType, stepPin, dirPin);
 
