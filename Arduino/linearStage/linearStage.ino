@@ -11,7 +11,6 @@ int med = 400;
 int slow = 100;
 
 // HOMING
-bool homed = false;
 int sensor = 10;
 int range = 4750;
 
@@ -26,6 +25,8 @@ void setup()
     ; // wait for serial port to connect. Needed for native USB port only
   }
   establishContact();  // send a byte to establish contact until receiver responds
+  Serial.println("HELLO");
+
   pinMode(sensor, INPUT_PULLUP); // INIT HALL SENSOR
   stepper.setMaxSpeed(1000); // MOTOR CONFIG
 }
@@ -35,7 +36,7 @@ void loop()
   int bytes = Serial.available();
   if (bytes > 0) {
     int inByte = Serial.read();
-    if (inByte == 72 && not homed) // H
+    if (inByte == 72) // H
     {
       homeStage();
     }
@@ -58,13 +59,15 @@ void loop()
 
 void establishContact() {
   while (Serial.available() <= 0) {
-    //Serial.println("0,0,0");   // send an initial string
+    Serial.println("CONNECTING...");
     delay(300);
   }
 }
 
 void homeStage()
 {
+  Serial.println("HOMING");
+  
   int homing = 1;
   while (homing == 1)
   {
@@ -73,13 +76,14 @@ void homeStage()
     homing = digitalRead(10);
   }
   stepper.setCurrentPosition(0);
-  homed = true;
 
   while (stepper.currentPosition() != range / 2)
   {
     stepper.setSpeed(fast);
     stepper.runSpeed();
   }
+
+  Serial.println("HOMED");
 }
 
 void moveStage()
@@ -97,4 +101,6 @@ void moveStage()
       stepper.runSpeed();
     }
   }
+
+  Serial.println("OK");
 }
