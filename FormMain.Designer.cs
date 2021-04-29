@@ -29,6 +29,7 @@ namespace Stepino
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnHome = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnGo = new System.Windows.Forms.Button();
@@ -40,6 +41,8 @@ namespace Stepino
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbxComm = new System.Windows.Forms.GroupBox();
             this.gbxMotion = new System.Windows.Forms.GroupBox();
+            this.btnRun = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.gbxComm.SuspendLayout();
@@ -141,9 +144,9 @@ namespace Stepino
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 262);
+            this.statusStrip.Location = new System.Drawing.Point(0, 163);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(569, 22);
+            this.statusStrip.Size = new System.Drawing.Size(245, 22);
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -168,26 +171,46 @@ namespace Stepino
             // 
             // gbxMotion
             // 
+            this.gbxMotion.Controls.Add(this.btnRun);
             this.gbxMotion.Controls.Add(this.btnHome);
             this.gbxMotion.Controls.Add(this.numericUpDown1);
             this.gbxMotion.Controls.Add(this.btnGo);
             this.gbxMotion.Location = new System.Drawing.Point(144, 9);
             this.gbxMotion.Name = "gbxMotion";
-            this.gbxMotion.Size = new System.Drawing.Size(91, 114);
+            this.gbxMotion.Size = new System.Drawing.Size(91, 141);
             this.gbxMotion.TabIndex = 10;
             this.gbxMotion.TabStop = false;
             this.gbxMotion.Text = "Motion";
+            // 
+            // btnRun
+            // 
+            this.btnRun.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnRun.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnRun.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
+            this.btnRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRun.Location = new System.Drawing.Point(6, 109);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(75, 23);
+            this.btnRun.TabIndex = 11;
+            this.btnRun.Text = "Run";
+            this.btnRun.UseVisualStyleBackColor = false;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 284);
+            this.ClientSize = new System.Drawing.Size(245, 185);
             this.Controls.Add(this.gbxMotion);
             this.Controls.Add(this.gbxComm);
             this.Controls.Add(this.statusStrip);
             this.Name = "FormMain";
             this.Text = "Stepino";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -211,6 +234,8 @@ namespace Stepino
         private System.Windows.Forms.GroupBox gbxComm;
         private System.Windows.Forms.GroupBox gbxMotion;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

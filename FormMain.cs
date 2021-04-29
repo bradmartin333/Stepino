@@ -11,6 +11,8 @@ namespace Stepino
     {
         private SerialPort _Port;
 
+        // Get this point using ShareX's Ruler tool
+        private static Point _CamShutter = new Point(1524, 328); 
         public FormMain()
         {
             InitializeComponent();
@@ -31,9 +33,6 @@ namespace Stepino
             };
 
             _Port.DataReceived += _Port_DataReceived;
-
-            System.Threading.Thread.Sleep(100);
-            btnScan.PerformClick();
         }
 
         void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -123,11 +122,29 @@ namespace Stepino
                 if (text.Contains("OK") || text.Contains("HOMED"))
                 {
                     InMotion(false);
+                    timer.Enabled = false;
 
                     if (text.Contains("HOMED"))
                         btnHome.BackColor = Color.LawnGreen;
                 }
             }
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            btnScan.PerformClick();
+        }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            numericUpDown1.Value = 0;
+            btnGo.PerformClick();
+            timer.Enabled = true;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            Clicking.SendClick(_CamShutter);
         }
     }
 }
